@@ -9,15 +9,29 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableHighlight,
+  Alert,
+  Button
 } from 'react-native';
 
 export default class littleChef extends Component {
+
+  _onPressButton () {
+    Alert.alert("You clicked it ");
+  }
+
+  testFunctionHere () {
+    return (
+      <Text>Somthing here</Text>
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Welcome to Little Chef!
         </Text>
         <Text style={styles.instructions}>
           To get started, edit index.android.js
@@ -26,6 +40,14 @@ export default class littleChef extends Component {
           Double tap R on your keyboard to reload,{'\n'}
           Shake or press menu button for dev menu
         </Text>
+        <TouchableHighlight onPress={this._onPressButton}>
+          <Text>Button</Text>
+        </TouchableHighlight>
+        <Button
+          onPress={this.testFunctionHere}
+          title="Test Button here"
+          color="#841584"
+        />
       </View>
     );
   }
@@ -36,7 +58,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#6184D3',
   },
   welcome: {
     fontSize: 20,
@@ -45,7 +67,7 @@ const styles = StyleSheet.create({
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
+    color: '#FF8E30',
     marginBottom: 5,
   },
 });

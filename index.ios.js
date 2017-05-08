@@ -31,21 +31,23 @@ export default class littleChef extends Component {
   }
 }
 
+//pallet url http://paletton.com/#uid=33L0u0kjiK7mL++q0Y27lAy3dry
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#6184D3',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 40,
     textAlign: 'center',
     margin: 10,
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
+    color: '#FF8E30',
     marginBottom: 5,
   },
 });
