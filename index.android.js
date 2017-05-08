@@ -14,33 +14,37 @@ import {
   Alert,
   Button,
   Image,
-  Dimensions
+  Dimensions,
+  TextInput
 } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'stretch',
     backgroundColor: '#6184D3',
+    margin: 10,
   },
   welcome: {
     flex: 1,
     fontSize: 20,
-    textAlign: 'center',
     margin: 10,
-    backgroundColor: 'black',
+    textAlign: 'center',
+    backgroundColor: 'blue',
   },
   instructions: {
     flex: 1,
+    margin: 10,
     textAlign: 'center',
     color: '#FF8E30',
     marginBottom: 5,
     backgroundColor: 'grey',
   },
   picture: {
-    flex: 2,
-    width: 200,
+    margin: 10,
+    flex: 5,
   }
 });
 
@@ -60,7 +64,8 @@ export default class littleChef extends Component {
       testPic: {
         uri: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTIyHhXZB8R393t4WxFUDZOID3db0hHhb86XAArbhna2PSJ9NgFKnQXqy0"
       },
-      testText: "Some test text"
+      testText: "Some test text",
+      text: ''
     };
   }
 
@@ -78,28 +83,32 @@ export default class littleChef extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to Little Chef!
+          Welcome to tester app!
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.android.js
+          Puppies are cute, but kittens are better.
         </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
+        <TextInput
+          style={{height: 40}}
+          placeholder="This is some placeholder"
+          onChangeText={text => this.setState({text})}
+          />
+        <Text style={{padding: 10, fontSize: 42}}>
+          {this.state.text.split(' ').map(word => word && '🍕').join(' ')}
         </Text>
-        <TouchableHighlight onPress={this.onPress}>
-          <Text>Button</Text>
-        </TouchableHighlight>
+        <Image source={this.state.testPic} style={styles.picture} />
         <Button
           onPress={this._onPressButton.bind(this)}
-          title="Test Button here"
+          title="Want a kitten? Click here!"
           color="#841584"
         />
-        <Image source={this.state.testPic} style={styles.picture} />
       </View>
     );
   }
 }
+// <TouchableHighlight onPress={this.onPress}>
+// <Text>Button</Text>
+// </TouchableHighlight>
 //<Text>{this.state.testText}</Text>
 //<TestingCall />
 //<Image source={this.state.testPic} style={{height, width}} />
