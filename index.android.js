@@ -15,12 +15,13 @@ import {
   Button,
   Image,
   Dimensions,
-  TextInput
+  TextInput,
+  ScrollView
 } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     // flexDirection: 'column',
     justifyContent: 'center',
     // alignItems: 'stretch',
@@ -28,14 +29,14 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   welcome: {
-    flex: 1,
+    // flex: 1,
     fontSize: 20,
     margin: 10,
     textAlign: 'center',
     backgroundColor: 'blue',
   },
   instructions: {
-    flex: 1,
+    // flex: 1,
     margin: 10,
     textAlign: 'center',
     color: '#FF8E30',
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   },
   picture: {
     margin: 10,
-    flex: 5,
+    height: 1000,    // flex: 5,
   }
 });
 
@@ -81,7 +82,8 @@ export default class littleChef extends Component {
     // let {height, width} = Dimensions.get('window');
 
     return (
-      <View style={styles.container}>
+      // <View style={styles.container}>
+      <ScrollView style={{height: 10000}}>
         <Text style={styles.welcome}>
           Welcome to tester app!
         </Text>
@@ -102,7 +104,8 @@ export default class littleChef extends Component {
           title="Want a kitten? Click here!"
           color="#841584"
         />
-      </View>
+        </ScrollView>
+      // </View>
     );
   }
 }
