@@ -50,15 +50,26 @@ class TestingCall extends Component {
 
 export default class littleChef extends Component {
 
+  constructor (props) {
+    super(props);
+    this.state = {
+      testPic: {
+        uri: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTIyHhXZB8R393t4WxFUDZOID3db0hHhb86XAArbhna2PSJ9NgFKnQXqy0"
+      },
+      testText: "Some test text"
+    };
+  }
+
   _onPressButton () {
     Alert.alert("You clicked it ");
-      <TestingCall />
+    this.setState({testText: 'Something new here'});
+    this.setState({testPic: {uri: "http://images4.fanpop.com/image/photos/22400000/Cute-Kitten-kittens-22438020-480-360.jpg"}});
   }
 
   render() {
 
     // let testPic = {uri: "http://images4.fanpop.com/image/photos/22400000/Cute-Kitten-kittens-22438020-480-360.jpg"};
-    // let {height, width} = Dimensions.get('window');
+    let {height, width} = Dimensions.get('window');
 
     return (
       <View style={styles.container}>
@@ -76,15 +87,17 @@ export default class littleChef extends Component {
           <Text>Button</Text>
         </TouchableHighlight>
         <Button
-          onPress={this._onPressButton}
+          onPress={this._onPressButton.bind(this)}
           title="Test Button here"
           color="#841584"
         />
-        <TestingCall />
+        <Text>{this.state.testText}</Text>
+        <Image source={this.state.testPic} style={{height, width}} />
       </View>
     );
   }
 }
-
+//<TestingCall />
+//<Image source={this.state.testPic} style={{height, width}} />
 //<Image source={testPic} style={{height, width}} />
 AppRegistry.registerComponent('littleChef', () => littleChef);
