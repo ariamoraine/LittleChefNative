@@ -43,29 +43,32 @@ class AllRecipes extends React.Component {
       }
     }
 
-    componentDidMount () {
-      AsyncStorage.getItem('recipes')
-      .then(returnedRecipes => {
-        console.log("Just got the info from the DB and it is", returnedRecipes)
-        this.setState({
-          recipes: returnedRecipes
-        })
-      })
-      .done();
+    async componentDidMount () {
+      try {
+        const foundRecipes = await AsyncStorage.getItem('recipes');
+        if (foundRecipes !== null) {
+          console.log("I found these recipes -> ", foundRecipes)
+          this.setState({
+            recipes: foundRecipes
+          })
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
 
     // getInitialState () {
     //   return {'recipes': " "};
     // }
 
-    saveData (text) {
-      console.log("Inside data", text)
-      AsyncStorage.setItem('recipes', this.state.textToUpdate)
-      .then((someStuff) => {
-        console.log('Inside save data', someStuff);
-      })
-      .done()
-      // this.setState({"recipes": this.state.textToUpdate + value});
+    async saveData (text) {
+      console.log("Inside save data func with text ->", text)
+      try {
+        await AsyncStorage.setItem('recipes', this.state.textToUpdate)
+        this.setState({"recipes": this.state.textToUpdate + value});
+      } catch (error) {
+        console.log(error)
+      }
     }
 
   render() {
@@ -77,7 +80,6 @@ class AllRecipes extends React.Component {
       <View>
         <Text>All your recipes</Text>
         <Text>{`Recipes: ${this.state.recipes}`}</Text>
-        <Text>{`TextToUpdate: ${this.state.TextToUpdate}`}</Text>
         <View>
           <TextInput
             onChangeText={text => {
@@ -96,7 +98,7 @@ class AllRecipes extends React.Component {
                 })
               }
             }}
-            value={this.state.textToUpdate}
+            // value={this.state.textToUpdate}
           />
         </View>
         <Text>
