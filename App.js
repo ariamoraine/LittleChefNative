@@ -38,41 +38,35 @@ class AllRecipes extends React.Component {
     constructor (props) {
       super(props);
       this.state = {
-        recipes: "",
+        recipes: '',
         textToUpdate: '',
       }
     }
 
-    async componentDidMount () {
-      try {
-        const foundRecipes = await AsyncStorage.getItem('recipes');
-        if (foundRecipes !== null) {
-          console.log("I found these recipes -> ", foundRecipes)
+    componentDidMount () {
+      AsyncStorage.getItem('recipes')
+      .then(results => {
+          console.log("I found these recipes -> ", results)
           this.setState({
-            recipes: foundRecipes
-          })
-        }
-      } catch (error) {
-        console.log(error)
-      }
+            recipes: results
+          });
+      })
+      .catch(console.log);
     }
 
-    // getInitialState () {
-    //   return {'recipes': " "};
-    // }
-
+    //Have to label the function as async if we want to use await.
     async saveData (text) {
-      console.log("Inside save data func with text ->", text)
+      console.log("Inside saveData func with text ->", text)
       try {
-        await AsyncStorage.setItem('recipes', this.state.textToUpdate)
-        this.setState({"recipes": this.state.textToUpdate + value});
+        await AsyncStorage.setItem('recipes', this.state.recipes + text)
+        console.log("After await");
+        this.setState({textToUpdate: ''});
       } catch (error) {
         console.log(error)
       }
     }
 
   render() {
-    console.log(this.state.recipes)
     let recipes = this.state.recipes || " ";
     const { navigate } = this.props.navigation;
 
@@ -86,19 +80,11 @@ class AllRecipes extends React.Component {
               console.log("RECIPES", this.state.recipes);
               console.log("TextToUpdate", this.state.textToUpdate);
               console.log("In onChange text is ->", text)
-              if (this.state.textToUpdate === null) {
-                console.log('Inside if in onChange')
                 this.setState({
                   textToUpdate: text
                 })
-              } else {
-                console.log('Inside else in onChange')
-                this.setState({
-                  textToUpdate: this.state.textToUpdate += text
-                })
-              }
             }}
-            // value={this.state.textToUpdate}
+            value={this.state.textToUpdate}
           />
         </View>
         <Text>
@@ -106,8 +92,10 @@ class AllRecipes extends React.Component {
         </Text>
         <Button
           onPress={() => {
-            console.log("In onpress", this.state.textToUpdate)
+            //since saveData is an async function we need to .then off it to
+            //catch errors
             this.saveData(this.state.textToUpdate)
+            .catch(console.log);
           }}
           title="Save"
           // onPress={() => navigate('AddRecipe')}
