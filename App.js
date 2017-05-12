@@ -44,14 +44,24 @@ class AllRecipes extends React.Component {
     }
 
     componentDidMount () {
-      AsyncStorage.getItem('recipes')
-      .then(results => {
-          console.log("I found these recipes -> ", results)
-          this.setState({
-            recipes: results
-          });
-      })
-      .catch(console.log);
+      this.fetchData()
+      .then(()=> console.log("I got recipes"))
+      .catch(console.log)
+    }
+
+    async fetchData () {
+      const foundRecipes = await AsyncStorage.getItem('recipes');
+      try {
+        this.setState({
+          recipes: foundRecipes
+        });
+      } catch (err) {
+        console.log(err)
+      }
+      // .then(results => {
+      //     console.log("I found these recipes -> ", results)
+      // })
+      // .catch(console.log);
     }
 
     //Have to label the function as async if we want to use await.
@@ -59,8 +69,6 @@ class AllRecipes extends React.Component {
       console.log("Inside saveData func with text ->", text)
       try {
         await AsyncStorage.setItem('recipes', this.state.recipes + text)
-        console.log("After await");
-        this.setState({textToUpdate: ''});
       } catch (error) {
         console.log(error)
       }
@@ -95,7 +103,9 @@ class AllRecipes extends React.Component {
             //since saveData is an async function we need to .then off it to
             //catch errors
             this.saveData(this.state.textToUpdate)
-            .catch(console.log);
+            .then(()=>this.fetchData())
+            this.setState({textToUpdate: ''})
+
           }}
           title="Save"
           // onPress={() => navigate('AddRecipe')}
