@@ -3,8 +3,11 @@ import {
   AppRegistry,
   Text,
   View,
-  Button
+  Button,
+  AsyncStorage,
+  TextInput,
 } from 'react-native';
+
 import { StackNavigator } from 'react-navigation';
 
 class HomeScreen extends React.Component {
@@ -17,34 +20,95 @@ class HomeScreen extends React.Component {
 
     return (
       <View>
-        <Text>Hello, Navigation and chat app!</Text>
+        <Text>Need a Little Chef?</Text>
         <Button
-          onPress={() => navigate('Chat', {user: 'Lucy'})}
-          title="Chat with Lucy!"
+          onPress={() => navigate('AllRecipes')}
+          title="Yes Please!"
         />
       </View>
     );
   }
 }
 
-class ChatScreen extends React.Component {
+class AllRecipes extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: `Chat with ${navigation.state.params.user}!!!!!`
+    title: `Recipes`
   })
 
+    constructor (props) {
+      super(props);
+      this.state = {
+        recipes: ""
+      }
+    }
+
+    componentDidMount () {
+      AsyncStorage.getItem('recipes')
+      .then(returnedRecipes => {
+        this.setState({'recipes': returnedRecipes})
+      })
+      .done();
+    }
+
+    // getInitialState () {
+    //   return {'recipes': " "};
+    // }
+
+    saveData (value) {
+      AsyncStorage.setItem('recipes', value);
+      this.setState({"recipes": this.state.recipes + value});
+    }
+
   render() {
-    const { params } = this.props.navigation.state;
+    console.log(this.state.recipes)
+    let recipes = this.state.recipes || " ";
+    const { navigate } = this.props.navigation;
     return (
       <View>
-        <Text>Chat with {params.user}</Text>
+        <Text>All your recipes</Text>
+        <Text>{this.state.recipes}</Text>
+        <View>
+          <TextInput
+            onChangeText={text => this.saveData(text)}
+            value=""
+          />
+        </View>
+        <Text>
+          Next time we open it will load the saved data
+        </Text>
+        <Button
+          // onPress=saveData()
+          onPress={() => navigate('AddRecipe')}
+          title="Add a new recipe!"
+        />
       </View>
     );
   }
 }
 
-const SimpleApp = StackNavigator({
+class AddRecipe extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Add a recipe'
+  })
+
+  render () {
+    const { navigate } = this.props.navigation;
+    return (
+      <View>
+        <Text>Add a recipe here!</Text>
+        <Button
+          onPress={() => navigate('AllRecipes')}
+          title="Save and add"
+        />
+      </View>
+    )
+  }
+}
+
+const littleChef = StackNavigator({
   Home: { screen: HomeScreen },
-  Chat: { screen: ChatScreen}
+  AllRecipes: { screen: AllRecipes},
+  AddRecipe: { screen: AddRecipe}
 });
 
-AppRegistry.registerComponent('littleChef', () => SimpleApp);
+AppRegistry.registerComponent('littleChef', () => littleChef);
