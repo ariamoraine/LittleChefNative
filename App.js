@@ -6,9 +6,28 @@ import {
   Button,
   AsyncStorage,
   TextInput,
+  Dimensions
 } from 'react-native';
-
+import Camera from 'react-native-camera';
 import { StackNavigator } from 'react-navigation';
+
+const styles = {
+  preview: {
+   flex: 1,
+   justifyContent: 'flex-end',
+   alignItems: 'center',
+   height: Dimensions.get('window').height,
+   width: Dimensions.get('window').width
+ },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    color: '#000',
+    padding: 10,
+    margin: 40
+  }
+}
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -74,6 +93,7 @@ class AllRecipes extends React.Component {
       }
     }
 
+
   render() {
     let recipes = this.state.recipes || " ";
     const { navigate } = this.props.navigation;
@@ -110,9 +130,41 @@ class AllRecipes extends React.Component {
           title="Save"
           // onPress={() => navigate('AddRecipe')}
           // title="Add a new recipe!"
+
+        />
+        <Button
+          onPress={() => navigate('CameraPage')}
+          title="Camera Page"
         />
       </View>
     );
+  }
+}
+
+class CameraPage extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Camera Page'
+  })
+
+  takePicture() {
+    this.camera.capture()
+    .then(data => console.log(data))
+    .catch(err => console.error(err))
+  }
+
+  render () {
+    const { navigate } = this.props.navigation;
+    return (
+      <Camera
+        ref={(cam) => {
+          this.camera = cam;
+        }}
+        style={styles.preview}
+        aspect={Camera.constants.Aspect.fill}>
+        <Text style={styles.capture} onPress={
+          this.takePicture.bind(this)}>[CAPTURE]</Text>
+      </Camera>
+    )
   }
 }
 
@@ -138,7 +190,8 @@ class AddRecipe extends React.Component {
 const littleChef = StackNavigator({
   Home: { screen: HomeScreen },
   AllRecipes: { screen: AllRecipes},
-  AddRecipe: { screen: AddRecipe}
+  AddRecipe: { screen: AddRecipe},
+  CameraPage: { screen: CameraPage}
 });
 
 AppRegistry.registerComponent('littleChef', () => littleChef);
