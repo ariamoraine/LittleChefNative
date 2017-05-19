@@ -65,7 +65,8 @@ export default class AllRecipes extends Component {
             value={this.state.textToUpdate}
           />
         </View>
-      */}
+        */
+        }
         <Text>
           These are all your saved recipes. If you would like to add another one. Click on the button below.
         </Text>

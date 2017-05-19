@@ -6,27 +6,32 @@ export default class AddRecipe extends Component {
   constructor (props) {
     super(props);
     this.state = {
+      title: '',
+      ingredients: [],
+      directions: '',
       inputText: ''
     };
     this.handleInput = this.handleInput.bind(this);
   }
 
-  handleInput (text) {
+  handleInput (text, type) {
     console.log(text);
+    console.log(type)
     this.setState({
-      inputText: text
+      [type]: text
     });
   }
 
   render () {
-    console.log('state text', this.state.inputText);
+    console.log('state text', this.state);
+    console.log('state. text to update', this.state.textToUpdate)
     return (
       <View>
         <Text>Add a recipe here!</Text>
         <View>
           <TextInput
-            onChangeText={this.handleInput}
-            value={this.state.textToUpdate}
+            onChangeText={(text) => this.handleInput(text, "title")}
+            value={this.state.title}
           />
         </View>
         <Button
