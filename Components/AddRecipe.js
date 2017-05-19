@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
-import { View, Button, Text, TextInput } from 'react-native';
+import { View, Button, Text, TextInput, StyleSheet} from 'react-native';
+
+  const styles = StyleSheet.create({
+    lines: {
+      borderTopWidth: 1,
+      borderBottomWidth: 1,
+      borderColor: 'black',
+      width: 400,
+    }
+  })
 
 export default class AddRecipe extends Component {
+
 
   constructor (props) {
     super(props);
@@ -15,8 +25,8 @@ export default class AddRecipe extends Component {
   }
 
   handleInput (text, type) {
-    console.log(text);
-    console.log(type)
+    console.log('Text, type', text, type);
+
     this.setState({
       [type]: text
     });
@@ -28,10 +38,29 @@ export default class AddRecipe extends Component {
     return (
       <View>
         <Text>Add a recipe here!</Text>
-        <View>
+        <View
+          style={styles.lines}>
+          <Text>Title :</Text>
           <TextInput
+            placeholder=""
             onChangeText={(text) => this.handleInput(text, "title")}
             value={this.state.title}
+          />
+        </View>
+        <View
+          style={styles.lines}>
+          <Text>Ingredients :</Text>
+          <TextInput
+            onChangeText={(ingredient) => this.handleInput(ingredient, "ingredients")}
+            value={this.state.ingredients}
+          />
+        </View>
+        <View
+          style={styles.lines}>
+          <Text>Directions :</Text>
+          <TextInput
+            onChangeText={(text) => this.handleInput(text, "directions")}
+            value={this.state.directions}
           />
         </View>
         <Button
