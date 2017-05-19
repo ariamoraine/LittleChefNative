@@ -22,19 +22,18 @@ const styles = {
 
 export default class CameraPage extends Component {
 
-  // static navigationOptions = ({ navigation }) => ({
-  //   title: 'Camera Page'
-  // })
+  constructor (props) {
+    super(props)
+    this.takePicture = this.takePicture.bind(this);
+  }
 
   takePicture() {
     this.camera.capture()
     .then(data => console.log(data))
-    .catch(err => console.error(err))
+    .catch(err => console.trace(err));
   }
 
   render () {
-    // const { navigate } = this.props.navigation;
-    console.log("INSIDECAMERA")
     return (
       <Camera
         ref={(cam) => {
@@ -42,9 +41,12 @@ export default class CameraPage extends Component {
         }}
         style={styles.preview}
         aspect={Camera.constants.Aspect.fill}>
-        <Text style={styles.capture} onPress={
-          this.takePicture.bind(this)}>[CAPTURE]</Text>
+        <Text
+          style={styles.capture}
+          onPress={
+            this.takePicture
+          }>[CAPTURE]</Text>
       </Camera>
-    )
+    );
   }
 }

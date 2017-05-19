@@ -11,7 +11,7 @@ const littleChefRouter = StackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
-      title: 'Welcome!'
+      title: 'Welcome to LittleChef!'
     }
    },
   AllRecipes: {

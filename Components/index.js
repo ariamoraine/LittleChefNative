@@ -8,8 +8,6 @@ import {
 export default class HomeScreen extends Component {
 
   render() {
-    // const { navigate } = this.props.navigation;
-
     return (
       <View>
         <Text>Need a Little Chef?</Text>

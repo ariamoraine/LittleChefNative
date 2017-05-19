@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 
 
+//this component should get all the recipes from the DB and display a thumbnail.
+//from each recipe you should be able to click on it and go to a single recipe component
 export default class AllRecipes extends Component {
 
     constructor (props) {
@@ -20,7 +22,7 @@ export default class AllRecipes extends Component {
 
     componentDidMount () {
       this.fetchData()
-      .then(()=> console.log("I got recipes"))
+      .then(() => console.log("I got recipes"))
       .catch(console.log)
     }
 
@@ -37,14 +39,12 @@ export default class AllRecipes extends Component {
 
     //Have to label the function as async if we want to use await.
     async saveData (text) {
-      console.log("Inside saveData func with text ->", text)
       try {
         await AsyncStorage.setItem('recipes', this.state.recipes + text)
       } catch (error) {
         console.log(error)
       }
     }
-
 
   render() {
     let recipes = this.state.recipes || " ";
@@ -54,12 +54,10 @@ export default class AllRecipes extends Component {
       <View>
         <Text>All your recipes</Text>
         <Text>{`Recipes: ${this.state.recipes}`}</Text>
+        {/*
         <View>
           <TextInput
             onChangeText={text => {
-              console.log("RECIPES", this.state.recipes);
-              console.log("TextToUpdate", this.state.textToUpdate);
-              console.log("In onChange text is ->", text)
                 this.setState({
                   textToUpdate: text
                 })
@@ -67,25 +65,33 @@ export default class AllRecipes extends Component {
             value={this.state.textToUpdate}
           />
         </View>
+      */}
         <Text>
-          Next time we open it will load the saved data
+          These are all your saved recipes. If you would like to add another one. Click on the button below.
         </Text>
+        {
+        /*
         <Button
           onPress={() => {
             //since saveData is an async function we need to .then off it to
             //catch errors
             this.saveData(this.state.textToUpdate)
-            .then(()=>this.fetchData())
-            this.setState({textToUpdate: ''})
-
+            .then(() => this.fetchData())
+            .then(this.setState({textToUpdate: ''}))
+            .catch(console.log);
           }}
           title="Save"
-
         />
+        */
+        }
         <Button
-          onPress={() => navigate('CameraPage')}
-          title="Camera Page"
+          onPress={() => navigate('AddRecipe')}
+          title="Add a new Recipe?"
         />
+        {/*// <Button
+        //   onPress={() => navigate('CameraPage')}
+        //   title="Camera Page"
+        // />*/}
       </View>
     );
   }
