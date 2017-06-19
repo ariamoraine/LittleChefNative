@@ -50,9 +50,12 @@ export default class AddRecipe extends Component {
   //Have to label the function as async if we want to use await.
   async saveData (text) {
     try {
-      console.log(typeof (JSON.stringify(this.state).toString()))
-      const stateString = JSON.stringify(this.state)
-      await AsyncStorage.setItem('recipes', stateString)
+      const recipeObj = {
+        title: this.state.title,
+        allIngredients: this.state.allIngredients,
+        directions: this.state.directions
+      }
+      await AsyncStorage.setItem('recipes', JSON.stringify(recipeObj))
     } catch (error) {
       console.trace(error)
     }
@@ -104,7 +107,7 @@ export default class AddRecipe extends Component {
       }
         <Button
           onPress={() => {
-            this.saveData(this.state.textToUpdate)
+            this.saveData()
             .then(
               navigate('AllRecipes')
             )

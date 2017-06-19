@@ -1,0 +1,1 @@
+export const FETCHING_RECIPES = 'FETCHING_RECIPES'

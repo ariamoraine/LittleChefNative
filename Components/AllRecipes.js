@@ -37,15 +37,6 @@ export default class AllRecipes extends Component {
       }
     }
 
-    // //Have to label the function as async if we want to use await.
-    // async saveData (text) {
-    //   try {
-    //     await AsyncStorage.setItem('recipes', this.state.recipes + text)
-    //   } catch (error) {
-    //     console.log(error)
-    //   }
-    // }
-
   render() {
     let recipes = this.state.recipes || " ";
     const { navigate } = this.props.navigation;
@@ -54,37 +45,9 @@ export default class AllRecipes extends Component {
       <View>
         <Text>All your recipes</Text>
         <Text>{`Recipes: ${this.state.recipes}`}</Text>
-        {/*
-        <View>
-          <TextInput
-            onChangeText={text => {
-                this.setState({
-                  textToUpdate: text
-                })
-            }}
-            value={this.state.textToUpdate}
-          />
-        </View>
-        */
-        }
         <Text>
           These are all your saved recipes. If you would like to add another one. Click on the button below.
         </Text>
-        {
-        /*
-        <Button
-          onPress={() => {
-            //since saveData is an async function we need to .then off it to
-            //catch errors
-            this.saveData(this.state.textToUpdate)
-            .then(() => this.fetchData())
-            .then(this.setState({textToUpdate: ''}))
-            .catch(console.log);
-          }}
-          title="Save"
-        />
-        */
-        }
         <Button
           onPress={() => navigate('AddRecipe')}
           title="Add a new Recipe?"
