@@ -37,14 +37,14 @@ export default class AllRecipes extends Component {
       }
     }
 
-    //Have to label the function as async if we want to use await.
-    async saveData (text) {
-      try {
-        await AsyncStorage.setItem('recipes', this.state.recipes + text)
-      } catch (error) {
-        console.log(error)
-      }
-    }
+    // //Have to label the function as async if we want to use await.
+    // async saveData (text) {
+    //   try {
+    //     await AsyncStorage.setItem('recipes', this.state.recipes + text)
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // }
 
   render() {
     let recipes = this.state.recipes || " ";

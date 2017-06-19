@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
-import { View, Button, Text, TextInput, StyleSheet} from 'react-native';
+import {
+  View,
+  Button,
+  Text,
+  TextInput,
+  StyleSheet,
+  AsyncStorage
+} from 'react-native';
 
+//temp styles just to mark a little bit
 const styles = StyleSheet.create({
   lines: {
     borderTopWidth: 1,
@@ -39,8 +47,19 @@ export default class AddRecipe extends Component {
     });
   }
 
-  render () {
+  //Have to label the function as async if we want to use await.
+  async saveData (text) {
+    try {
+      console.log(typeof (JSON.stringify(this.state).toString()))
+      const stateString = JSON.stringify(this.state)
+      await AsyncStorage.setItem('recipes', stateString)
+    } catch (error) {
+      console.trace(error)
+    }
+  }
 
+  render () {
+    const { navigate } = this.props.navigation;
     return (
       <View>
         <Text>Add a recipe here!</Text>
@@ -80,11 +99,17 @@ export default class AddRecipe extends Component {
           />
         </View>
       {
-        /* Save recipe button //should build the recipe object and save it to the db
+        /* Save recipe button should build the recipe object and save it to the db
         and route us back to the main recipe page where the new recipe will display */
       }
         <Button
-          onPress={() => this.props.navigation.navigate('AllRecipes')}
+          onPress={() => {
+            this.saveData(this.state.textToUpdate)
+            .then(
+              navigate('AllRecipes')
+            )
+            .catch(console.log)
+          }}
           title="SAVE AND ADD"
         />
       </View>
