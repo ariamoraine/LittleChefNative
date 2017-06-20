@@ -14,9 +14,8 @@ class HomeScreen extends Component {
         <Text>Need a Little Chef?</Text>
         <Button
           onPress={() => {
-            // this.props.fetchAllRecipes()
+            this.props.fetchAllRecipes()
             // this.props.navigation.navigate('AllRecipes')
-            this.props.nav('AllRecipes')
           }}
           // onPress={() => this.props.fetchAllRecipes()}
           title="Yes Please!"
@@ -28,8 +27,7 @@ class HomeScreen extends Component {
 
 function mapStateToProps (state) {
   return {
-    recipes: state.recipesReducer.recipes,
-    nav: this.props.navigation.navigate
+    recipes: state.recipesReducer.recipes
   };
 }
 
