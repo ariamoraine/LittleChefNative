@@ -4,26 +4,39 @@ import {
   Text,
   Button
 } from 'react-native';
-import { Provider } from 'react-redux';
-import configureStore from '../configureStore';
+import { connect } from 'react-redux'
+import { fetchAllRecipes } from '../actions'
 
-
-export default class HomeScreen extends Component {
-
+class HomeScreen extends Component {
   render() {
-
-    const store = configureStore();
-
     return (
-      <Provider store={store}>
-        <View>
-          <Text>Need a Little Chef?</Text>
-          <Button
-            onPress={() => this.props.navigation.navigate('AllRecipes')}
-            title="Yes Please!"
-          />
-        </View>
-      </Provider>
+      <View>
+        <Text>Need a Little Chef?</Text>
+        <Button
+          onPress={() => {
+            // this.props.fetchAllRecipes()
+            // this.props.navigation.navigate('AllRecipes')
+            this.props.nav('AllRecipes')
+          }}
+          // onPress={() => this.props.fetchAllRecipes()}
+          title="Yes Please!"
+        />
+      </View>
     );
   }
 }
+
+function mapStateToProps (state) {
+  return {
+    recipes: state.recipesReducer.recipes,
+    nav: this.props.navigation.navigate
+  };
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    fetchAllRecipes: () => dispatch(fetchAllRecipes())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

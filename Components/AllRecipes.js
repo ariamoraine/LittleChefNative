@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Text,
   View,
@@ -6,6 +7,7 @@ import {
   AsyncStorage,
   TextInput,
 } from 'react-native';
+import { getRecipes } from '../actions'
 
 
 //this component should get all the recipes from the DB and display a thumbnail.
@@ -60,3 +62,5 @@ export default class AllRecipes extends Component {
     );
   }
 }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(AllRecipes)
