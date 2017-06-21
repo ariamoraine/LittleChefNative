@@ -12,7 +12,6 @@ export default class HomeScreen extends Component {
   constructor (props) {
     super(props);
     this.state = store.getState();
-    this.loadRecipes = this.loadRecipes.bind(this);
   }
 
   componentDidMount () {
@@ -26,8 +25,7 @@ export default class HomeScreen extends Component {
   }
 
   loadRecipes () {
-    console.log('Inside Load Recipes')
-    store.dispatch(fetchAllRecipes())
+    store.dispatch(fetchAllRecipes());
   }
 
   render() {
@@ -39,7 +37,6 @@ export default class HomeScreen extends Component {
             this.loadRecipes();
             this.props.navigation.navigate('AllRecipes')
           }}
-          // onPress={() => this.props.fetchAllRecipes()}
           title="Yes Please!"
         />
       </View>
