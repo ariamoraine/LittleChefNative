@@ -3,7 +3,14 @@ import rootReducer from './reducers';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-export default function configureStore() {
-  let store = createStore(rootReducer, applyMiddleware(thunk, logger));
-  return store;
-}
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk, logger)
+);
+
+export default store;
+
+// export default function configureStore() {
+//   let store = createStore(rootReducer, applyMiddleware(thunk, logger));
+//   return store;
+// }

@@ -8,7 +8,7 @@ import {
   TextInput,
 } from 'react-native';
 import { getRecipes } from '../actions'
-
+import store from '../configureStore';
 
 //this component should get all the recipes from the DB and display a thumbnail.
 //from each recipe you should be able to click on it and go to a single recipe component
@@ -16,16 +16,20 @@ export default class AllRecipes extends Component {
 
     constructor (props) {
       super(props);
-      this.state = {
-        recipes: '',
-        textToUpdate: '',
-      }
+      this.state = store.getState();
     }
 
     componentDidMount () {
-      this.fetchData()
-      .then(() => console.log("I got recipes"))
-      .catch(console.log)
+      // this.fetchData()
+      // .then(() => console.log("I got recipes"))
+      // .catch(console.log)
+      this.unsubscribe = store.subscribe(() => {
+        this.setState(store.getState());
+      });
+    }
+
+    componentWillUnmount () {
+      this.unsubscribe();
     }
 
     async fetchData () {
@@ -40,13 +44,14 @@ export default class AllRecipes extends Component {
     }
 
   render() {
-    let recipes = this.state.recipes || " ";
+    console.log("THIS IS STATE", this.state)
+    let recipes = this.state.recipesReducer.recipes[0] || " ";
     const { navigate } = this.props.navigation;
-
+    console.log("RECIPES", recipes)
     return (
       <View>
         <Text>All your recipes</Text>
-        <Text>{`Recipes: ${this.state.recipes}`}</Text>
+        <Text>{`Recipes: ${recipes}`}</Text>
         <Text>
           These are all your saved recipes. If you would like to add another one. Click on the button below.
         </Text>

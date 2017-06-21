@@ -4,18 +4,40 @@ import {
   Text,
   Button
 } from 'react-native';
-import { connect } from 'react-redux'
-import { fetchAllRecipes } from '../actions'
+import { fetchAllRecipes } from '../actions';
+import store from '../configureStore';
 
-class HomeScreen extends Component {
+export default class HomeScreen extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = store.getState();
+    this.loadRecipes = this.loadRecipes.bind(this);
+  }
+
+  componentDidMount () {
+    this.unsubscribe = store.subscribe(() => {
+      this.setState(store.getState());
+    });
+  }
+
+  componentWillUnmount () {
+    this.unsubscribe();
+  }
+
+  loadRecipes () {
+    console.log('Inside Load Recipes')
+    store.dispatch(fetchAllRecipes())
+  }
+
   render() {
     return (
       <View>
         <Text>Need a Little Chef?</Text>
         <Button
           onPress={() => {
-            this.props.fetchAllRecipes()
-            // this.props.navigation.navigate('AllRecipes')
+            this.loadRecipes();
+            this.props.navigation.navigate('AllRecipes')
           }}
           // onPress={() => this.props.fetchAllRecipes()}
           title="Yes Please!"
@@ -24,17 +46,3 @@ class HomeScreen extends Component {
     );
   }
 }
-
-function mapStateToProps (state) {
-  return {
-    recipes: state.recipesReducer.recipes
-  };
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    fetchAllRecipes: () => dispatch(fetchAllRecipes())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
