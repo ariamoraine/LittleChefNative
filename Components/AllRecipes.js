@@ -24,15 +24,27 @@ export default class AllRecipes extends Component {
     }
 
   render() {
-    let recipes = this.state.recipesReducer.recipes[0] || " ";
+    let recipes = this.state.recipesReducer.recipes;
     const { navigate } = this.props.navigation;
+
     return (
       <View>
         <Text>All your recipes</Text>
-        <Text>{`Recipes: ${recipes}`}</Text>
-        <Text>
-          These are all your saved recipes. If you would like to add another one. Click on the button below.
-        </Text>
+        <Text>{`Recipe Count: ${recipes.length}`}</Text>
+        {
+          //break this out into a recipe component
+          recipes.map((recipe, index) => {
+            return (
+              <View key={index}>
+                <Text>{`Title: ${recipe.title}`}</Text>
+                <Text>Ingredients: </Text>
+                {recipe.allIngredients.map((ingredient, idx) => {
+                  return <Text key={idx + index}>{`${ingredient}`}</Text>
+                })}
+              </View>
+            );
+          })
+        }
         <Button
           onPress={() => navigate('AddRecipe')}
           title="Add a new Recipe?"

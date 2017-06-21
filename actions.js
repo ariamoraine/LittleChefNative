@@ -20,7 +20,7 @@ export function fetchAllRecipes() {
 async function getRecipes () {
   const foundRecipes = await AsyncStorage.getItem('recipes');
   try {
-    return foundRecipes
+    return JSON.parse(foundRecipes)
   } catch (err) {
     console.log(err)
   }
