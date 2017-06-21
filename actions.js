@@ -9,12 +9,11 @@ export function gotRecipesSuccess(recipes) {
 }
 
 export function fetchAllRecipes() {
-  return (dispatch) => {
+  return dispatch => {
     getRecipes()
-      .then((recipes) => {
-        dispatch(gotRecipesSuccess(recipes))
-      })
-      .catch((err) => console.log('err:', err))
+    .then(recipes => {
+      dispatch(gotRecipesSuccess(recipes))
+    })
   }
 }
 

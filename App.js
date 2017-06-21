@@ -5,11 +5,11 @@ import { StackNavigator } from 'react-navigation';
 import CameraPage from './Components/CameraPage';
 import AllRecipes from './Components/AllRecipes';
 import AddRecipe from './Components/AddRecipe';
-import Home from './Containers';
+import HomeScreen from './Components';
 
 const littleChefRouter = StackNavigator({
   Home: {
-    screen: Home,
+    screen: HomeScreen,
     navigationOptions: {
       title: 'Welcome to LittleChef!'
     }
