@@ -5,8 +5,9 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  AsyncStorage
 } from 'react-native';
+import store from '../configureStore';
+import { saveNewRecipe } from '../actions';
 
 //temp styles just to mark a little bit
 const styles = StyleSheet.create({
@@ -27,10 +28,21 @@ export default class AddRecipe extends Component {
       allIngredients: [],
       currentIngredient: '',
       directions: '',
-      inputText: ''
+      inputText: '',
+      allrecipes: store.getState().recipesReducer.recipes
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleIngInput = this.handleIngInput.bind(this);
+  }
+
+  componentDidMount () {
+    this.unsubscribe = store.subscribe(() => {
+      this.setState(store.getState());
+    });
+  }
+
+  componentWillUnmount () {
+    this.unsubscribe();
   }
 
   handleIngInput () {
@@ -41,24 +53,19 @@ export default class AddRecipe extends Component {
   }
 
   handleInput (text, type) {
-    console.log('Text, type', text, type);
     this.setState({
       [type]: text
     });
   }
 
-  //Have to label the function as async if we want to use await.
-  async saveData (text) {
-    try {
-      const recipeObj = {
-        title: this.state.title,
-        allIngredients: this.state.allIngredients,
-        directions: this.state.directions
-      }
-      await AsyncStorage.setItem('recipes', JSON.stringify(recipeObj))
-    } catch (error) {
-      console.trace(error)
-    }
+  saveData() {
+    const newRecipeObj = {
+      title: this.state.title,
+      allIngredients: this.state.allIngredients,
+      directions: this.state.directions
+    };
+
+    store.dispatch(saveNewRecipe(newRecipeObj));
   }
 
   render () {
@@ -107,11 +114,8 @@ export default class AddRecipe extends Component {
       }
         <Button
           onPress={() => {
-            this.saveData()
-            .then(
-              navigate('AllRecipes')
-            )
-            .catch(console.log)
+            this.saveData();
+            navigate('AllRecipes');
           }}
           title="SAVE AND ADD"
         />

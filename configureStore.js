@@ -9,8 +9,3 @@ const store = createStore(
 );
 
 export default store;
-
-// export default function configureStore() {
-//   let store = createStore(rootReducer, applyMiddleware(thunk, logger));
-//   return store;
-// }
