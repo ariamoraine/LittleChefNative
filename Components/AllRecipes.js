@@ -25,6 +25,7 @@ export default class AllRecipes extends Component {
 
   render() {
     let recipes = this.state.recipesReducer.recipes;
+    console.log(recipes)
     const { navigate } = this.props.navigation;
 
     return (

@@ -10,7 +10,7 @@ export default function dataReducer (state = initialState, action) {
 
   switch (action.type) {
     case GOT_RECIPES_SUCCESS:
-      newState.recipes = [...state.recipes, action.recipes];
+      newState.recipes = [...action.recipes];
       break;
 
     default:
