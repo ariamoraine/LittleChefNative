@@ -4,7 +4,6 @@ import store from './configureStore'
 
 
 export function gotRecipesSuccess(recipes) {
-  console.log('inside got Recipes success')
   return {
     type: GOT_RECIPES_SUCCESS,
     recipes
@@ -15,7 +14,6 @@ export function fetchAllRecipes() {
   return dispatch => {
     getRecipes()
     .then(recipes => {
-      console.log("recipes ", recipes)
       dispatch(gotRecipesSuccess(recipes))
     })
     .catch(console.error)
@@ -49,7 +47,6 @@ async function getRecipes () {
 }
 
 async function savingNewRecipe (newRecipeObj) {
-  console.log(newRecipeObj)
   let newRandomId = new IDGenerator().generate()
   try {
     await AsyncStorage.setItem(newRandomId, JSON.stringify(newRecipeObj))
