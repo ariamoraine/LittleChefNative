@@ -49,10 +49,6 @@ export default class AllRecipes extends Component {
           onPress={() => navigate('AddRecipe')}
           title="Add a new Recipe?"
         />
-        {/*// <Button
-        //   onPress={() => navigate('CameraPage')}
-        //   title="Camera Page"
-        // />*/}
       </View>
     );
   }

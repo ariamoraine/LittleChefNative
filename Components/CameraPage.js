@@ -23,17 +23,24 @@ const styles = {
 export default class CameraPage extends Component {
 
   constructor (props) {
-    super(props)
+    super(props);
     this.takePicture = this.takePicture.bind(this);
   }
 
   takePicture() {
     this.camera.capture()
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data)//data is the photo object with the mediaUri and the path
+      //next I want to pass back information for the photo object to the add
+      //recipe component
+      this.props.navigation.state.params.handleInput(data, "photoInfo")
+      this.props.navigation.navigate('AddRecipe')
+    })
     .catch(err => console.trace(err));
   }
 
   render () {
+    console.log("PROPS!", this.props.navigation.state.params.saveData)
     return (
       <Camera
         ref={(cam) => {
@@ -45,7 +52,7 @@ export default class CameraPage extends Component {
           style={styles.capture}
           onPress={
             this.takePicture
-          }>[CAPTURE]</Text>
+          }>[SNAP!]</Text>
       </Camera>
     );
   }

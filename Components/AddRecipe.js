@@ -5,6 +5,8 @@ import {
   Text,
   TextInput,
   StyleSheet,
+  Modal,
+  TouchableHighlight
 } from 'react-native';
 import store from '../configureStore';
 import { saveNewRecipe } from '../actions';
@@ -29,7 +31,9 @@ export default class AddRecipe extends Component {
       currentIngredient: '',
       directions: '',
       inputText: '',
-      allrecipes: store.getState().recipesReducer.recipes
+      photoInfo: '',
+      allrecipes: store.getState().recipesReducer.recipes,
+      modalVisible: false,
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleIngInput = this.handleIngInput.bind(this);
@@ -53,6 +57,7 @@ export default class AddRecipe extends Component {
   }
 
   handleInput (text, type) {
+    console.log("PHOTO INFO", text, type)
     this.setState({
       [type]: text
     });
@@ -68,8 +73,13 @@ export default class AddRecipe extends Component {
     store.dispatch(saveNewRecipe(newRecipeObj));
   }
 
+  setModalVisible (isVisible) {
+    this.setState({modalVisible: isVisible});
+  }
+
   render () {
     const { navigate } = this.props.navigation;
+    console.log("THIS IS STATE IN ADD RECIPE", this.state);
     return (
       <View>
         <Text>Add a recipe here!</Text>
@@ -108,10 +118,34 @@ export default class AddRecipe extends Component {
             multiline={true}
           />
         </View>
-      {
-        /* Save recipe button should build the recipe object and save it to the db
-        and route us back to the main recipe page where the new recipe will display */
-      }
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {alert('Modal has been closed')}}
+          >
+          <View style={{marginTop:22}}>
+            <View>
+              <Text>Hello Modal!</Text>
+              <TouchableHighlight onPress={() => {
+                this.setModalVisible(!this.state.modalVisible)
+              }}>
+              <Text>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+        <TouchableHighlight onPress={() => {
+          this.setModalVisible(true)
+        }}>
+          <Text>Show Modal</Text>
+        </TouchableHighlight>
+
+        <Button
+          onPress={() => navigate('CameraPage', {handleInput: this.handleInput})}
+          title="Add a photo?"
+        />
+
         <Button
           onPress={() => {
             this.saveData();
