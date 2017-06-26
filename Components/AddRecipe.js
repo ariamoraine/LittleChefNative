@@ -6,8 +6,9 @@ import {
   TextInput,
   StyleSheet,
   Modal,
-  TouchableHighlight
+  Dimensions
 } from 'react-native';
+import Camera from 'react-native-camera';
 import store from '../configureStore';
 import { saveNewRecipe } from '../actions';
 
@@ -18,6 +19,21 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: 'black',
     width: 400,
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width
+  },
+  capture: {
+     flex: 0,
+     backgroundColor: '#fff',
+     borderRadius: 5,
+     color: '#000',
+     padding: 10,
+     margin: 40
   }
 });
 
@@ -37,6 +53,7 @@ export default class AddRecipe extends Component {
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleIngInput = this.handleIngInput.bind(this);
+    this.setModalVisible = this.setModalVisible.bind(this);
   }
 
   componentDidMount () {
@@ -75,6 +92,22 @@ export default class AddRecipe extends Component {
 
   setModalVisible (isVisible) {
     this.setState({modalVisible: isVisible});
+    this.takePicture = this.takePicture.bind(this);
+  }
+
+  takePicture() {
+    this.camera.capture()
+    .then(data => {
+      console.log(data)
+      //data is the photo object with the mediaUri and the path
+      //next I want to pass back information for the photo object to the add
+      //recipe component
+      // this.props.navigation.state.params.handleInput(data, "photoInfo")
+      // this.props.navigation.navigate('AddRecipe')
+      this.handleInput(data, "photoInfo")
+      this.setModalVisible(!this.state.modalVisible);
+    })
+    .catch(err => console.trace(err));
   }
 
   render () {
@@ -118,34 +151,40 @@ export default class AddRecipe extends Component {
             multiline={true}
           />
         </View>
+        <Text>{`${this.state.photoInfo.mediaUri}, ${this.state.photoInfo.path}`}</Text>
         <Modal
           animationType={'slide'}
           transparent={false}
           visible={this.state.modalVisible}
-          onRequestClose={() => {alert('Modal has been closed')}}
+          onRequestClose={() => {
+            this.setModalVisible(!this.state.modalVisible);
+          }}
           >
-          <View style={{marginTop:22}}>
-            <View>
-              <Text>Hello Modal!</Text>
-              <TouchableHighlight onPress={() => {
-                this.setModalVisible(!this.state.modalVisible)
-              }}>
-              <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
+          <Camera
+            ref={(cam) => {
+              this.camera = cam;
+            }}
+            style={styles.preview}
+            aspect={Camera.constants.Aspect.fill}>
+            <Text
+              style={styles.capture}
+              onPress={
+                this.takePicture
+              }>[SNAP!]</Text>
+          </Camera>
         </Modal>
-        <TouchableHighlight onPress={() => {
-          this.setModalVisible(true)
-        }}>
-          <Text>Show Modal</Text>
-        </TouchableHighlight>
-
         <Button
-          onPress={() => navigate('CameraPage', {handleInput: this.handleInput})}
-          title="Add a photo?"
+          onPress={() => {
+          this.setModalVisible(true);
+        }}
+        title="Add A Photo"
         />
-
+{
+        // <Button
+        //   onPress={() => navigate('CameraPage', {handleInput: this.handleInput})}
+        //   title="Add a photo?"
+        // />
+}
         <Button
           onPress={() => {
             this.saveData();
