@@ -3,6 +3,7 @@ import {
   Text,
   View,
   Button,
+  Image
 } from 'react-native';
 import store from '../configureStore';
 
@@ -41,6 +42,10 @@ export default class AllRecipes extends Component {
                 {recipe.allIngredients.map((ingredient, idx) => {
                   return <Text key={idx + index}>{`${ingredient}`}</Text>
                 })}
+                <Image
+                style={{width: 100, height: 100}}
+                source={{uri: recipe.photoUri}}
+                />
               </View>
             );
           })
