@@ -75,7 +75,6 @@ export default class AddRecipe extends Component {
   }
 
   handleInput (text, type) {
-    console.log("PHOTO INFO", text, type)
     this.setState({
       [type]: text
     });

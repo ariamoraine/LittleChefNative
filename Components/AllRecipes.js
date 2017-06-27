@@ -42,13 +42,9 @@ export default class AllRecipes extends Component {
               <TouchableHighlight onPress={() => navigate('SingleRecipe', {currentRecipe: recipe})} key={index}>
                 <View>
                   <Text>{`Title: ${recipe.title}`}</Text>
-                  <Text>Ingredients: </Text>
-                  {recipe.allIngredients.map((ingredient, idx) => {
-                    return <Text key={idx + index}>{`${ingredient}`}</Text>
-                  })}
                   <Image
-                  style={{width: (Dimensions.get('window').width/3)*2, height: (Dimensions.get('window').width/3)*2}}
-                  source={{uri: recipe.photoUri}}
+                    style={{width: (Dimensions.get('window').width/3)*2, height: (Dimensions.get('window').width/3)*2}}
+                    source={{uri: recipe.photoUri}}
                   />
                 </View>
               </TouchableHighlight>
