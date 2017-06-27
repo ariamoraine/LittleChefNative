@@ -48,7 +48,7 @@ export default class AddRecipe extends Component {
       currentIngredient: '',
       directions: '',
       inputText: '',
-      photoInfo: '',
+      photoUri: '',
       allrecipes: store.getState().recipesReducer.recipes,
       modalVisible: false,
     };
@@ -85,7 +85,8 @@ export default class AddRecipe extends Component {
     const newRecipeObj = {
       title: this.state.title,
       allIngredients: this.state.allIngredients,
-      directions: this.state.directions
+      directions: this.state.directions,
+      photoUri: this.state.photoUri
     };
 
     store.dispatch(saveNewRecipe(newRecipeObj));
@@ -99,13 +100,7 @@ export default class AddRecipe extends Component {
   takePicture() {
     this.camera.capture()
     .then(data => {
-      console.log(data)
-      //data is the photo object with the mediaUri and the path
-      //next I want to pass back information for the photo object to the add
-      //recipe component
-      // this.props.navigation.state.params.handleInput(data, "photoInfo")
-      // this.props.navigation.navigate('AddRecipe')
-      this.handleInput(data, "photoInfo")
+      this.handleInput(data.mediaUri, 'photoUri');
       this.setModalVisible(!this.state.modalVisible);
     })
     .catch(err => console.trace(err));
@@ -113,9 +108,6 @@ export default class AddRecipe extends Component {
 
   render () {
     const { navigate } = this.props.navigation;
-    console.log("THIS IS STATE IN ADD RECIPE", this.state);
-    const photoURI = this.state.photoInfo.mediaUri
-    console.log("Photo uri", photoURI)
 
     return (
       <View>
@@ -155,7 +147,8 @@ export default class AddRecipe extends Component {
             multiline={true}
           />
         </View>
-        { !this.state.photoInfo ?
+        {/* Photo display or modal to add one */}
+        { !this.state.photoUri ?
           <View>
             <Modal
               animationType={'slide'}
@@ -189,7 +182,7 @@ export default class AddRecipe extends Component {
           :
           <Image
             style={{width: 100, height: 100}}
-            source={{uri: photoURI}}
+            source={{uri: this.state.photoUri}}
           />
         }
         <Button
