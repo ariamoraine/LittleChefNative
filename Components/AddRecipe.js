@@ -6,7 +6,8 @@ import {
   TextInput,
   StyleSheet,
   Modal,
-  Dimensions
+  Dimensions,
+  Image
 } from 'react-native';
 import Camera from 'react-native-camera';
 import store from '../configureStore';
@@ -113,6 +114,9 @@ export default class AddRecipe extends Component {
   render () {
     const { navigate } = this.props.navigation;
     console.log("THIS IS STATE IN ADD RECIPE", this.state);
+    const photoURI = this.state.photoInfo.mediaUri
+    console.log("Photo uri", photoURI)
+
     return (
       <View>
         <Text>Add a recipe here!</Text>
@@ -151,40 +155,43 @@ export default class AddRecipe extends Component {
             multiline={true}
           />
         </View>
-        <Text>{`${this.state.photoInfo.mediaUri}, ${this.state.photoInfo.path}`}</Text>
-        <Modal
-          animationType={'slide'}
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            this.setModalVisible(!this.state.modalVisible);
-          }}
-          >
-          <Camera
-            ref={(cam) => {
-              this.camera = cam;
+        { !this.state.photoInfo ?
+          <View>
+            <Modal
+              animationType={'slide'}
+              transparent={false}
+              visible={this.state.modalVisible}
+              onRequestClose={() => {
+                this.setModalVisible(!this.state.modalVisible);
+              }}
+              >
+              <Camera
+                ref={(cam) => {
+                  this.camera = cam;
+                }}
+                style={styles.preview}
+                aspect={Camera.constants.Aspect.fill}>
+                <Text
+                  style={styles.capture}
+                  onPress={
+                    this.takePicture
+                  }>[SNAP!]</Text>
+              </Camera>
+            </Modal>
+
+            <Button
+              onPress={() => {
+              this.setModalVisible(true);
             }}
-            style={styles.preview}
-            aspect={Camera.constants.Aspect.fill}>
-            <Text
-              style={styles.capture}
-              onPress={
-                this.takePicture
-              }>[SNAP!]</Text>
-          </Camera>
-        </Modal>
-        <Button
-          onPress={() => {
-          this.setModalVisible(true);
-        }}
-        title="Add A Photo"
-        />
-{
-        // <Button
-        //   onPress={() => navigate('CameraPage', {handleInput: this.handleInput})}
-        //   title="Add a photo?"
-        // />
-}
+            title="Add A Photo"
+            />
+          </View>
+          :
+          <Image
+            style={{width: 100, height: 100}}
+            source={{uri: photoURI}}
+          />
+        }
         <Button
           onPress={() => {
             this.saveData();
