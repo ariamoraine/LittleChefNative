@@ -24,9 +24,22 @@ export default class singleRecipe extends Component {
   }
 
   render () {
-    console.log(this.props.navigation.state.params.currentRecipe)
-    return(
-      <Text>SOMETHING HERE</Text>
-    )
+    const { title, allIngredients, directions, photoUri} = this.props.navigation.state.params.currentRecipe
+
+    return (
+      <View>
+        <Image
+          style={{width: 300, height: 300}}
+          source={{uri: photoUri}}
+        />
+        <Text>{title}</Text>
+        {
+          allIngredients.map(ingredient => {
+            return <Text>{ingredient}</Text>
+          })
+        }
+        <Text>{directions}</Text>
+      </View>
+    );
   }
 }
