@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import {
   Text,
+  ScrollView,
   View,
   Button,
-  Image
+  Image,
+  Dimensions,
+  TouchableHighlight,
 } from 'react-native';
 import store from '../configureStore';
 
@@ -29,24 +32,26 @@ export default class AllRecipes extends Component {
     const { navigate } = this.props.navigation;
 
     return (
-      <View>
-        <Text>All your recipes</Text>
+      <ScrollView>
+        <Text>These are all your recipes</Text>
         <Text>{`Recipe Count: ${recipes.length}`}</Text>
         {
           //break this out into a recipe component
           recipes.map((recipe, index) => {
             return (
-              <View key={index}>
-                <Text>{`Title: ${recipe.title}`}</Text>
-                <Text>Ingredients: </Text>
-                {recipe.allIngredients.map((ingredient, idx) => {
-                  return <Text key={idx + index}>{`${ingredient}`}</Text>
-                })}
-                <Image
-                style={{width: 100, height: 100}}
-                source={{uri: recipe.photoUri}}
-                />
-              </View>
+              <TouchableHighlight onPress={() => navigate('SingleRecipe', {currentRecipe: recipe})} key={index}>
+                <View>
+                  <Text>{`Title: ${recipe.title}`}</Text>
+                  <Text>Ingredients: </Text>
+                  {recipe.allIngredients.map((ingredient, idx) => {
+                    return <Text key={idx + index}>{`${ingredient}`}</Text>
+                  })}
+                  <Image
+                  style={{width: (Dimensions.get('window').width/3)*2, height: (Dimensions.get('window').width/3)*2}}
+                  source={{uri: recipe.photoUri}}
+                  />
+                </View>
+              </TouchableHighlight>
             );
           })
         }
@@ -54,7 +59,7 @@ export default class AllRecipes extends Component {
           onPress={() => navigate('AddRecipe')}
           title="Add a new Recipe?"
         />
-      </View>
+      </ScrollView>
     );
   }
 }
