@@ -9,7 +9,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import store from '../configureStore';
-const defaultImage = require('../public/food-1050813_960_720.jpg')
+const defaultImage = require('../assets/photos/food-1050813_960_720.jpg')
 
 export default class AllRecipes extends Component {
 

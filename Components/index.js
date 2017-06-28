@@ -39,7 +39,7 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <Image
-        source={require('../public/main_food.jpg')}
+        source={require('../assets/photos/main_food.jpg')}
         style={styles.backgroundImage}>
         <Text style={styles.welcomeText}>Want a little chef?</Text>
       </Image>
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     backgroundColor: 'rgba(0,0,0,0)',
-    fontSize: 32
+    fontSize: 45,
+    fontFamily: 'TenaliRamakrishna-Regular'
   }
 });

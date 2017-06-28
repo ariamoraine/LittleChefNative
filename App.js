@@ -17,19 +17,22 @@ const littleChefRouter = StackNavigator({
   AllRecipes: {
     screen: AllRecipes,
     navigationOptions: {
-      title: 'All recipes'
+      title: 'All recipes',
+      header: null
     }
   },
   AddRecipe: {
     screen: AddRecipe,
     navigationOptions: {
-      title: 'Add a recipe'
+      title: 'Add a recipe',
+      header: null
     }
   },
   SingleRecipe: {
     screen: SingleRecipe,
     navigationOptions: {
-      title: 'Single Recipe'
+      title: 'Single Recipe',
+      header: null
     }
   }
 });

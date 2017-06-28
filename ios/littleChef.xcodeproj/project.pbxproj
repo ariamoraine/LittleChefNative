@@ -37,6 +37,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		732EC6580E614AFBA932217C /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E274310FDB471E9D112A20 /* libRCTCamera.a */; };
 		57225BE9018C4CFAAD864AA9 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B48A966AB9B44698FAEB7D6 /* libRNFetchBlob.a */; };
+		EBD774532E7C43FC83BF9294 /* TenaliRamakrishna-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 663C6AAA830244DA9695B02D /* TenaliRamakrishna-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -260,6 +261,7 @@
 		E3E274310FDB471E9D112A20 /* libRCTCamera.a */ = {isa = PBXFileReference; name = "libRCTCamera.a"; path = "libRCTCamera.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		320BBAB5B9F04D7EAD51A4CD /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; name = "RNFetchBlob.xcodeproj"; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		9B48A966AB9B44698FAEB7D6 /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		663C6AAA830244DA9695B02D /* TenaliRamakrishna-Regular.ttf */ = {isa = PBXFileReference; name = "TenaliRamakrishna-Regular.ttf"; path = "../assets/fonts/TenaliRamakrishna-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -476,6 +478,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* littleChefTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				E5213EBA89BE4077941A6541 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -491,6 +494,15 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		E5213EBA89BE4077941A6541 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				663C6AAA830244DA9695B02D /* TenaliRamakrishna-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -850,6 +862,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				EBD774532E7C43FC83BF9294 /* TenaliRamakrishna-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
