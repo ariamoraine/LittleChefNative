@@ -36,9 +36,18 @@ export default class HomeScreen extends Component {
           flex: 1,
           width: null,
           height: null,
-          resizeMode: 'cover'}
-        }
-      />
+          resizeMode: 'cover',
+          justifyContent: 'center',
+          flexDirection: 'column'}
+        }>
+
+      <Text style={{
+        textAlign: 'center',
+        color: 'white',
+        backgroundColor: 'rgba(0,0,0,0)',
+        fontSize: 32,
+        }}>Want a little chef?</Text>
+      </Image>
     );
   }
 }
