@@ -9,6 +9,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import store from '../configureStore';
+const defaultImage = require('../public/food-1050813_960_720.jpg')
 
 export default class AllRecipes extends Component {
 
@@ -38,13 +39,14 @@ export default class AllRecipes extends Component {
         {
           //break this out into a recipe component
           recipes.map((recipe, index) => {
+            const photoSource = recipe.photoUri ? {uri: recipe.photoUri} : defaultImage;
             return (
               <TouchableHighlight onPress={() => navigate('SingleRecipe', {currentRecipe: recipe})} key={index}>
                 <View>
                   <Text>{`Title: ${recipe.title}`}</Text>
                   <Image
                     style={{width: (Dimensions.get('window').width/3)*2, height: (Dimensions.get('window').width/3)*2}}
-                    source={{uri: recipe.photoUri}}
+                    source={photoSource}
                   />
                 </View>
               </TouchableHighlight>
