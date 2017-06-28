@@ -3,9 +3,27 @@ import {
   Text,
   Image,
   TouchableHighlight,
+  StyleSheet
 } from 'react-native';
 import { fetchAllRecipes } from '../actions';
 import store from '../configureStore';
+
+const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    flexDirection: 'column'
+  },
+  welcomeText: {
+    textAlign: 'center',
+    color: 'white',
+    backgroundColor: 'rgba(0,0,0,0)',
+    fontSize: 32
+  }
+});
 
 export default class HomeScreen extends Component {
 
@@ -18,10 +36,17 @@ export default class HomeScreen extends Component {
     this.unsubscribe = store.subscribe(() => {
       this.setState(store.getState());
     });
+    this.loadRecipes();
   }
 
   componentWillUnmount () {
     this.unsubscribe();
+  }
+
+  componentDidUpdate () {
+    setTimeout(() => {
+      this.props.navigation.navigate('AllRecipes');
+    }, 1500);
   }
 
   loadRecipes () {
@@ -32,27 +57,8 @@ export default class HomeScreen extends Component {
     return (
       <Image
         source={require('../public/main_food.jpg')}
-        style={{
-          flex: 1,
-          width: null,
-          height: null,
-          resizeMode: 'cover',
-          justifyContent: 'center',
-          flexDirection: 'column'}
-        }>
-
-        <TouchableHighlight onPress={() => {
-          this.loadRecipes();
-          this.props.navigation.navigate('AllRecipes');
-        }}>
-
-        <Text style={{
-          textAlign: 'center',
-          color: 'white',
-          backgroundColor: 'rgba(0,0,0,0)',
-          fontSize: 32,
-          }}>Want a little chef?</Text>
-        </TouchableHighlight>
+        style={styles.backgroundImage}>
+        <Text style={styles.welcomeText}>Want a little chef?</Text>
       </Image>
     );
   }
