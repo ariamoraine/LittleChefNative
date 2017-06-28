@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import {
-  View,
   Text,
-  Button,
-  Image
+  Image,
+  TouchableHighlight,
 } from 'react-native';
 import { fetchAllRecipes } from '../actions';
 import store from '../configureStore';
@@ -31,7 +30,8 @@ export default class HomeScreen extends Component {
 
   render() {
     return (
-      <Image source={require('../public/main_food.jpg')}
+      <Image
+        source={require('../public/main_food.jpg')}
         style={{
           flex: 1,
           width: null,
@@ -41,23 +41,19 @@ export default class HomeScreen extends Component {
           flexDirection: 'column'}
         }>
 
-      <Text style={{
-        textAlign: 'center',
-        color: 'white',
-        backgroundColor: 'rgba(0,0,0,0)',
-        fontSize: 32,
-        }}>Want a little chef?</Text>
+        <TouchableHighlight onPress={() => {
+          this.loadRecipes();
+          this.props.navigation.navigate('AllRecipes');
+        }}>
+
+        <Text style={{
+          textAlign: 'center',
+          color: 'white',
+          backgroundColor: 'rgba(0,0,0,0)',
+          fontSize: 32,
+          }}>Want a little chef?</Text>
+        </TouchableHighlight>
       </Image>
     );
   }
 }
-      //<View>
-        //      <Text>Need a Little Chef?</Text>
-          //    <Button
-            //    onPress={() => {
-              //    this.loadRecipes();
-                //  this.props.navigation.navigate('AllRecipes')
-                //}}
-                //title="Yes Please!"
-              ///>
-            //</View>
