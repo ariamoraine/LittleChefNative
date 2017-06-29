@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { fetchAllRecipes } from '../actions';
 import store from '../configureStore';
+import { MAINFONT, TEXTHEADERSIZE } from '../assets/styles/theme';
 
 
 export default class HomeScreen extends Component {
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     backgroundColor: 'rgba(0,0,0,0)',
-    fontSize: 45,
-    fontFamily: 'TenaliRamakrishna-Regular'
+    fontSize: TEXTHEADERSIZE,
+    fontFamily: MAINFONT
   }
 });

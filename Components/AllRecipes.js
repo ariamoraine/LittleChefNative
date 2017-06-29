@@ -5,11 +5,27 @@ import {
   View,
   Button,
   Image,
-  Dimensions,
   TouchableHighlight,
+  StyleSheet
 } from 'react-native';
+import { getTheme } from 'react-native-material-kit';
 import store from '../configureStore';
-const defaultImage = require('../assets/photos/food-1050813_960_720.jpg')
+import { MAINFONT, TEXTHEADERSIZE, PHOTOSIZE } from '../assets/styles/theme';
+const defaultImage = require('../assets/photos/food-1050813_960_720.jpg');
+
+const styles = StyleSheet.create({
+  main: {
+    // display: 'flex',
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // backgroundColor: 'silver',
+    // alignItems: 'center'
+  },
+  photos: {
+    width: PHOTOSIZE,
+    height: PHOTOSIZE,
+  }
+})
 
 export default class AllRecipes extends Component {
 
@@ -31,29 +47,28 @@ export default class AllRecipes extends Component {
   render() {
     let recipes = this.state.recipesReducer.recipes;
     const { navigate } = this.props.navigation;
+    const theme = getTheme();
 
     return (
-      <ScrollView>
-        <Text>These are all your recipes</Text>
-        <Text>{`Recipe Count: ${recipes.length}`}</Text>
+      <ScrollView contentContainerStyle={styles.main}>
+        <Text style={{fontFamily: MAINFONT, fontSize: TEXTHEADERSIZE}}>Here are all your recipes</Text>
+        <Text style={{fontFamily: MAINFONT}}>{`Total recipe count: ${recipes.length}`}</Text>
         {
           //break this out into a recipe component
           recipes.map((recipe, index) => {
             const photoSource = recipe.photoUri ? {uri: recipe.photoUri} : defaultImage;
             return (
               <TouchableHighlight onPress={() => navigate('SingleRecipe', {currentRecipe: recipe})} key={index}>
-                <View>
-                  <Text>{`Title: ${recipe.title}`}</Text>
-                  <Image
-                    style={{width: (Dimensions.get('window').width/3)*2, height: (Dimensions.get('window').width/3)*2}}
-                    source={photoSource}
-                  />
-                </View>
+              <View style={theme.cardStyle}>
+                <Image source={photoSource} style={theme.cardImageStyle} />
+                <Text style={theme.cardTitleStyle}>{recipe.title}</Text>
+              </View>
               </TouchableHighlight>
             );
           })
         }
         <Button
+          style={{fontFamily: MAINFONT}}
           onPress={() => navigate('AddRecipe')}
           title="Add a new Recipe?"
         />
@@ -61,3 +76,13 @@ export default class AllRecipes extends Component {
     );
   }
 }
+
+// <TouchableHighlight onPress={() => navigate('SingleRecipe', {currentRecipe: recipe})} key={index}>
+//                 <View>
+//                   <Text style={{fontFamily: MAINFONT}}>{`Title: ${recipe.title}`}</Text>
+//                   <Image
+//                     style={styles.photos}
+//                     source={photoSource}
+//                   />
+//                 </View>
+//               </TouchableHighlight>
