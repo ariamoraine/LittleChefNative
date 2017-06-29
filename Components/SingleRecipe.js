@@ -3,10 +3,11 @@ import {
   Text,
   View,
   Image,
-  Dimensions
+  Dimensions,
+  Li
 } from 'react-native';
 import store from '../configureStore';
-import { getTheme, menu } from 'react-native-material-kit';
+import { getTheme } from 'react-native-material-kit';
 const defaultImage = require('../assets/photos/food-1050813_960_720.jpg');
 
 
@@ -28,9 +29,10 @@ export default class singleRecipe extends Component {
   }
 
   render () {
-    const { title, allIngredients, directions, photoUri} = this.props.navigation.state.params.currentRecipe
+    let { title, allIngredients, directions, photoUri} = this.props.navigation.state.params.currentRecipe;
     const theme = getTheme();
-
+    console.log(photoUri);
+    photoUri = photoUri ? {uri: photoUri} : defaultImage;
     return (
       <View style={{
           flex: 1,
@@ -41,14 +43,17 @@ export default class singleRecipe extends Component {
           alignItems: 'center',
         }}>
         <View style={theme.cardStyle}>
-          <Image source={defaultImage} style={theme.cardImageStyle} />
-          <Text style={theme.cardTitleStyle}>Welcome</Text>
+          <Image source={photoUri} style={theme.cardImageStyle} />
+          <Text style={theme.cardTitleStyle}>{title}</Text>
           <Text style={theme.cardContentStyle}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Mauris sagittis pellentesque lacus eleifend lacinia...
+            {
+              allIngredients.map(ingredient => {
+                console.log("test")
+                return <Text>{`${ingredient}\n`}</Text>
+              })
+            }
           </Text>
-          <View style={theme.cardMenuStyle}>{menu}</View>
-          <Text style={theme.cardActionStyle}>My Action</Text>
+          <Text style={theme.cardActionStyle}>{directions}</Text>
         </View>
       </View>
     );
