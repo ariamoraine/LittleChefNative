@@ -6,6 +6,7 @@ import {
   Button,
   Image,
   TouchableHighlight,
+  TouchableOpacity,
   StyleSheet
 } from 'react-native';
 import { getTheme } from 'react-native-material-kit';
@@ -57,12 +58,12 @@ export default class AllRecipes extends Component {
           recipes.map((recipe, index) => {
             const photoSource = recipe.photoUri ? {uri: recipe.photoUri} : defaultImage;
             return (
-              <TouchableHighlight onPress={() => navigate('SingleRecipe', {currentRecipe: recipe})} key={index}>
-              <View style={theme.cardStyle}>
-                <Image source={photoSource} style={theme.cardImageStyle} />
-                <Text style={theme.cardTitleStyle}>{recipe.title}</Text>
+              <View style={theme.cardStyle} key={index}>
+              <TouchableOpacity onPress={() => navigate('SingleRecipe', {currentRecipe: recipe})}>
+                  <Image source={photoSource} style={theme.cardImageStyle}/>
+                  <Text style={theme.cardTitleStyle}>{recipe.title}</Text>
+              </TouchableOpacity>
               </View>
-              </TouchableHighlight>
             );
           })
         }

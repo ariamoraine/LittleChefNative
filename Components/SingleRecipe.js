@@ -47,9 +47,9 @@ export default class singleRecipe extends Component {
           <Text style={theme.cardTitleStyle}>{title}</Text>
           <Text style={theme.cardContentStyle}>
             {
-              allIngredients.map(ingredient => {
+              allIngredients.map((ingredient, index) => {
                 console.log("test")
-                return <Text>{`${ingredient}\n`}</Text>
+                return <Text key={index}>{`${ingredient}\n`}</Text>
               })
             }
           </Text>
