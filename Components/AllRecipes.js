@@ -15,11 +15,10 @@ const defaultImage = require('../assets/photos/food-1050813_960_720.jpg');
 
 const styles = StyleSheet.create({
   main: {
-    // display: 'flex',
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // backgroundColor: 'silver',
-    // alignItems: 'center'
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   photos: {
     width: PHOTOSIZE,
