@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import { fetchAllRecipes } from '../actions';
 import store from '../configureStore';
-import { MAINFONT, TEXTHEADERSIZE } from '../assets/styles/theme';
-
+import { MAINFONT, TEXTHEADERSIZE, MAINTEXT } from '../assets/styles/theme';
+const forkImage = require('../assets/photos/white.png');
 
 export default class HomeScreen extends Component {
 
@@ -44,8 +44,9 @@ export default class HomeScreen extends Component {
         source={require('../assets/photos/main_food.jpg')}
         style={styles.backgroundImage}>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('AllRecipes')}>
-          <Text style={styles.welcomeText}>NEED A LITTLE CHEF?</Text>
+          <Text style={MAINTEXT}>{`Welcome\nto\nLittle Chef!`}</Text>
         </TouchableOpacity>
+        <Image source={forkImage} style={{position: 'absolute', alignSelf: 'center', top: 400, width: 150, height: 150}} />
       </Image>
     );
   }
