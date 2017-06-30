@@ -3,8 +3,6 @@ import {
   Text,
   View,
   Image,
-  Dimensions,
-  Li
 } from 'react-native';
 import store from '../configureStore';
 import { getTheme } from 'react-native-material-kit';

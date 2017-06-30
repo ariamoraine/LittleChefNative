@@ -54,6 +54,16 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>TenaliRamakrishna-Regular.ttf</string>
+		<string>JosefinSlab-Bold.ttf</string>
+		<string>JosefinSlab-BoldItalic.ttf</string>
+		<string>JosefinSlab-Italic.ttf</string>
+		<string>JosefinSlab-Light.ttf</string>
+		<string>JosefinSlab-LightItalic.ttf</string>
+		<string>JosefinSlab-Regular.ttf</string>
+		<string>JosefinSlab-SemiBold.ttf</string>
+		<string>JosefinSlab-SemiBoldItalic.ttf</string>
+		<string>JosefinSlab-Thin.ttf</string>
+		<string>JosefinSlab-ThinItalic.ttf</string>
 	</array>
 </dict>
 </plist>

@@ -1,7 +1,8 @@
 import { Dimensions } from 'react-native';
 
 
-export const MAINFONT = 'TenaliRamakrishna-Regular';
+// export const MAINFONT = 'TenaliRamakrishna-Regular';
+export const MAINFONT = 'JosefinSlab-SemiBoldItalic';
 export const TEXTHEADERSIZE = 45;
 export const PHOTOSIZE = Dimensions.get('window').width;
 

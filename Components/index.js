@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   Text,
   Image,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 import { fetchAllRecipes } from '../actions';
 import store from '../configureStore';
@@ -42,7 +43,9 @@ export default class HomeScreen extends Component {
       <Image
         source={require('../assets/photos/main_food.jpg')}
         style={styles.backgroundImage}>
-        <Text style={styles.welcomeText}>Want a little chef?</Text>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('AllRecipes')}>
+          <Text style={styles.welcomeText}>NEED A LITTLE CHEF?</Text>
+        </TouchableOpacity>
       </Image>
     );
   }
