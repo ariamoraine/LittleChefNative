@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { getTheme } from 'react-native-material-kit';
 import store from '../configureStore';
-import { MAINFONT, TEXTHEADERSIZE, PHOTOSIZE } from '../assets/styles/theme';
+import { MAINFONT, TEXTHEADERSIZE } from '../assets/styles/theme';
 const defaultImage = require('../assets/photos/food-1050813_960_720.jpg');
 
 const styles = StyleSheet.create({
@@ -19,10 +19,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  photos: {
-    width: PHOTOSIZE,
-    height: PHOTOSIZE,
   }
 })
 
@@ -49,29 +45,33 @@ export default class AllRecipes extends Component {
     const theme = getTheme();
 
     return (
-      <ScrollView contentContainerStyle={styles.main}>
-        <Text style={{fontFamily: MAINFONT, fontSize: TEXTHEADERSIZE}}>Here are all your recipes</Text>
-        <Text style={{fontFamily: MAINFONT}}>{`Total recipe count: ${recipes.length}`}</Text>
-        {
-          //break this out into a recipe component
-          recipes.map((recipe, index) => {
-            const photoSource = recipe.photoUri ? {uri: recipe.photoUri} : defaultImage;
-            return (
-              <View style={theme.cardStyle} key={index}>
-              <TouchableOpacity onPress={() => navigate('SingleRecipe', {currentRecipe: recipe})}>
-                  <Image source={photoSource} style={theme.cardImageStyle}/>
-                  <Text style={theme.cardTitleStyle}>{recipe.title}</Text>
-              </TouchableOpacity>
-              </View>
-            );
-          })
-        }
+      <View style={{flex: 1}}>
+        <ScrollView contentContainerStyle={styles.main}>
+          <Text style={{top: 10, fontFamily: MAINFONT, fontSize: TEXTHEADERSIZE}}>ALL RECIPES </Text>
+          <Text />
+          {
+            //break this out into a recipe component
+            recipes.map((recipe, index) => {
+              const photoSource = recipe.photoUri ? {uri: recipe.photoUri} : defaultImage;
+              return (
+                <View style={theme.cardStyle} key={index}>
+                <TouchableOpacity onPress={() => navigate('SingleRecipe', {currentRecipe: recipe})}>
+                    <Image source={photoSource} style={theme.cardImageStyle}/>
+                    <Text style={theme.cardTitleStyle}>{recipe.title}</Text>
+                </TouchableOpacity>
+                </View>
+              );
+            })
+          }
+        </ScrollView>
         <Button
-          style={{fontFamily: MAINFONT}}
+          color="red"
+          borderRadius={0}
+          style={{fontFamily: MAINFONT, color: "red", borderRadius: 0, position:'absolute', left:0, right: 0, bottom: 0}}
           onPress={() => navigate('AddRecipe')}
           title="Add a new Recipe?"
         />
-      </ScrollView>
+      </View>
     );
   }
 }
