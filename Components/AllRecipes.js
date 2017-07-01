@@ -3,9 +3,9 @@ import {
   Text,
   ScrollView,
   View,
-  Button,
   Image,
   TouchableOpacity,
+  TouchableHighlight,
   StyleSheet
 } from 'react-native';
 import { getTheme } from 'react-native-material-kit';
@@ -64,24 +64,13 @@ export default class AllRecipes extends Component {
             })
           }
         </ScrollView>
-        <Button
-          color="red"
-          borderRadius={0}
-          style={{fontFamily: MAINFONT, color: "red", borderRadius: 0, position:'absolute', left:0, right: 0, bottom: 0}}
+        <TouchableHighlight
+          style={{backgroundColor: 'rgb(117, 117, 117)', position: 'absolute', padding: 10, left: 0, right: 0, bottom: 0}}
           onPress={() => navigate('AddRecipe')}
-          title="Add a new Recipe?"
-        />
+        >
+        <Text style={{fontFamily: MAINFONT, color: 'white', textAlign: 'center'}}>ADD NEW RECIPE</Text>
+        </TouchableHighlight>
       </View>
     );
   }
 }
-
-// <TouchableHighlight onPress={() => navigate('SingleRecipe', {currentRecipe: recipe})} key={index}>
-//                 <View>
-//                   <Text style={{fontFamily: MAINFONT}}>{`Title: ${recipe.title}`}</Text>
-//                   <Image
-//                     style={styles.photos}
-//                     source={photoSource}
-//                   />
-//                 </View>
-//               </TouchableHighlight>
