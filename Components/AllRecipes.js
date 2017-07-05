@@ -6,21 +6,12 @@ import {
   Image,
   TouchableOpacity,
   TouchableHighlight,
-  StyleSheet
 } from 'react-native';
 import { getTheme } from 'react-native-material-kit';
 import store from '../configureStore';
-import { MAINFONT, TEXTHEADERSIZE } from '../assets/styles/theme';
+import { allRecipes } from '../assets/styles/theme';
 const defaultImage = require('../assets/photos/food-1050813_960_720.jpg');
 
-const styles = StyleSheet.create({
-  main: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
 
 export default class AllRecipes extends Component {
 
@@ -46,8 +37,8 @@ export default class AllRecipes extends Component {
 
     return (
       <View style={{flex: 1}}>
-        <ScrollView contentContainerStyle={styles.main}>
-          <Text style={{top: 10, fontFamily: MAINFONT, fontSize: TEXTHEADERSIZE}}>ALL RECIPES </Text>
+        <ScrollView contentContainerStyle={allRecipes.main}>
+          <Text style={allRecipes.headerText}>ALL RECIPES </Text>
           <Text />
           {
             //break this out into a recipe component
@@ -65,10 +56,10 @@ export default class AllRecipes extends Component {
           }
         </ScrollView>
         <TouchableHighlight
-          style={{backgroundColor: 'rgb(117, 117, 117)', position: 'absolute', padding: 10, left: 0, right: 0, bottom: 0}}
+          style={allRecipes.addRecipeButton}
           onPress={() => navigate('AddRecipe')}
         >
-        <Text style={{fontFamily: MAINFONT, color: 'white', textAlign: 'center'}}>ADD NEW RECIPE</Text>
+        <Text style={allRecipes.addRecipeText}>ADD NEW RECIPE</Text>
         </TouchableHighlight>
       </View>
     );

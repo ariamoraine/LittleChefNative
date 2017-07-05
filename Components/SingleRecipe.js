@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import store from '../configureStore';
 import { getTheme } from 'react-native-material-kit';
+import { MAINFONT, SECONDFONT } from '../assets/styles/theme';
 const defaultImage = require('../assets/photos/food-1050813_960_720.jpg');
 
 
@@ -43,15 +44,16 @@ export default class singleRecipe extends Component {
         <View style={theme.cardStyle}>
           <Image source={photoUri} style={theme.cardImageStyle} />
           <Text style={theme.cardTitleStyle}>{title}</Text>
+          <Text style={{fontSize: 20, top: 10, left: 8}}>{`Ingredients: \n`}</Text>
           <Text style={theme.cardContentStyle}>
             {
               allIngredients.map((ingredient, index) => {
-                console.log("test")
                 return <Text key={index}>{`${ingredient}\n`}</Text>
               })
             }
           </Text>
-          <Text style={theme.cardActionStyle}>{directions}</Text>
+          <Text style={{ fontFamily: SECONDFONT,  fontSize: 20, top: 10, left: 8}}>Directions:</Text>
+          <Text style={theme.cardContentStyle}>{directions}</Text>
         </View>
       </View>
     );
