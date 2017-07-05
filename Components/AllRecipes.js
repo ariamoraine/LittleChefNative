@@ -57,9 +57,9 @@ export default class AllRecipes extends Component {
         </ScrollView>
         <TouchableHighlight
           style={allRecipes.addRecipeButton}
-          onPress={() => navigate('AddRecipe')}
+          onPress={() => navigate('AddOrEdit')}
         >
-        <Text style={allRecipes.addRecipeText}>ADD NEW RECIPE</Text>
+        <Text style={allRecipes.addRecipeText}>ADD / EDIT A RECIPE</Text>
         </TouchableHighlight>
       </View>
     );
