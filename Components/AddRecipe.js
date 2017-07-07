@@ -60,25 +60,15 @@ export default class AddRecipe extends Component {
     this.unsubscribe = store.subscribe(() => {
       this.setState(store.getState());
     });
-    if (this.props.navigation.state.params) {
-      let {title, allIngredients, directions, photoUri} = this.props.navigation.state.params.currentRecipe
+    if (this.props.navigation.state.params) { //if we passed in a recipe to edit
+      let {title, allIngredients, directions, photoUri} = this.props.navigation.state.params.currentRecipe;
       this.setState({
         title,
         allIngredients,
         directions,
         photoUri
-      })
+      });
     }
-    // this.props.navigation.state.params.currentRecipe ? this.state = {
-    //     title: this.props.navigation.state.params.currentRecipe.title,
-    //     allIngredients: [...this.props.navigation.state.params.currentRecipe.allIngredients],
-    //     currentIngredient: '',
-    //     directions: '',
-    //     inputText: '',
-    //     photoUri: '',
-    //     allrecipes: store.getState().recipesReducer.recipes,
-    //     modalVisible: false,
-    //   }
   }
 
   componentWillUnmount () {
