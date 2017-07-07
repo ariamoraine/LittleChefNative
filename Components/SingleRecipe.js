@@ -59,36 +59,4 @@ export default class singleRecipe extends Component {
     );
   }
 }
-/*
 
-<View style={{
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: '#000',
-        borderBottomWidth: 0,
-        shadowColor: '#000',
-        shadowOffset: { width: 7, height: 8 },
-        elevation: 5,
-        shadowOpacity: 1,
-        shadowRadius: 2,
-        marginLeft: 5,
-        marginRight: 5,
-        marginTop: 10}}>
-        <Text>TESTING</Text>
-      </View>
-
-
-<View>
-        <Image
-          style={{width: 300, height: 300}}
-          source={{uri: photoUri}}
-        />
-        <Text>{title}</Text>
-        {
-          allIngredients.map(ingredient => {
-            return <Text>{ingredient}</Text>
-          })
-        }
-        <Text>{directions}</Text>
-      </View>
-*/
