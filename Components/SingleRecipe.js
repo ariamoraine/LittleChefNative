@@ -30,7 +30,6 @@ export default class singleRecipe extends Component {
   render () {
     let { title, allIngredients, directions, photoUri} = this.props.navigation.state.params.currentRecipe;
     const theme = getTheme();
-    console.log(photoUri);
     photoUri = photoUri ? {uri: photoUri} : defaultImage;
     return (
       <View style={{
@@ -52,11 +51,10 @@ export default class singleRecipe extends Component {
               })
             }
           </Text>
-          <Text style={{ fontFamily: SECONDFONT,  fontSize: 20, top: 10, left: 8}}>Directions:</Text>
+          <Text style={{ fontSize: 20, top: 10, left: 8}}>Directions:</Text>
           <Text style={theme.cardContentStyle}>{directions}</Text>
         </View>
       </View>
     );
   }
 }
-

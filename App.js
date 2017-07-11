@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import SingleRecipe from './Components/SingleRecipe';
 import AllRecipes from './Components/AllRecipes';
 import AddRecipe from './Components/AddRecipe';
+import AddOrEdit from './Components/AddOrEdit';
 import HomeScreen from './Components';
 
 const littleChefRouter = StackNavigator({
@@ -16,21 +17,24 @@ const littleChefRouter = StackNavigator({
   AllRecipes: {
     screen: AllRecipes,
     navigationOptions: {
-      title: 'All recipes',
       header: null
     }
   },
   AddRecipe: {
     screen: AddRecipe,
     navigationOptions: {
-      title: 'Add a recipe',
       header: null
     }
   },
   SingleRecipe: {
     screen: SingleRecipe,
     navigationOptions: {
-      title: 'Single Recipe',
+      header: null
+    }
+  },
+  AddOrEdit: {
+    screen: AddOrEdit,
+    navigationOptions: {
       header: null
     }
   }
