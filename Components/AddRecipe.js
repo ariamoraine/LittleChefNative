@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Camera from 'react-native-camera';
 import store from '../configureStore';
-import { saveNewRecipe } from '../actions';
+import { saveNewRecipe, updateRecipe } from '../actions';
 
 //temp styles just to mark a little bit
 const styles = StyleSheet.create({
@@ -61,12 +61,13 @@ export default class AddRecipe extends Component {
       this.setState(store.getState());
     });
     if (this.props.navigation.state.params) { //if we passed in a recipe to edit
-      let {title, allIngredients, directions, photoUri} = this.props.navigation.state.params.currentRecipe;
+      let {key, title, allIngredients, directions, photoUri} = this.props.navigation.state.params.currentRecipe;
       this.setState({
         title,
         allIngredients,
         directions,
-        photoUri
+        photoUri,
+        key
       });
     }
   }
@@ -89,14 +90,20 @@ export default class AddRecipe extends Component {
   }
 
   saveData() {
-    const newRecipeObj = {
+    const recipeObjToSave = {
       title: this.state.title,
       allIngredients: this.state.allIngredients,
       directions: this.state.directions,
       photoUri: this.state.photoUri
     };
 
-    store.dispatch(saveNewRecipe(newRecipeObj));
+    if (this.state.key) { //if the state has a key that means we are editing a old recipe
+      console.log('TESTING INSIDE IF OF SAVE DATA')
+      //here is where we would call update
+      store.dispatch(updateRecipe(this.state.key, recipeObjToSave))
+    } else {
+      store.dispatch(saveNewRecipe(recipeObjToSave));
+    }
   }
 
   setModalVisible (isVisible) {
@@ -115,7 +122,7 @@ export default class AddRecipe extends Component {
 
   render () {
     const { navigate } = this.props.navigation;
-
+    console.log("State", this.state)
     return (
       <View>
         <Text>Add a recipe here!</Text>

@@ -10,6 +10,16 @@ export function gotRecipesSuccess(recipes) {
   };
 }
 
+export function updateRecipe (key, recipeToUpdate) {
+  return dispatch => {
+    updatingRecipe(key, recipeToUpdate)
+    .then(() => {
+      store.dispatch(fetchAllRecipes())
+    })
+    .catch(console.error)
+  }
+}
+
 export function fetchAllRecipes() {
   return dispatch => {
     getRecipes()
@@ -37,10 +47,8 @@ async function getRecipes () {
 
   foundRecipesObj.map(recipe => {
     let [key, recipeObj] = recipe
-    recipeObj = JSON.parse(recipeObj) //this is a parsed version of the found recipe
-    key = Number(key) //converting the string of the recipe key into a number
-    recipeObj['key'] = key
-    console.log("THINGS", recipeObj)
+    recipeObj = JSON.parse(recipeObj) //the found recipe comes back as a string
+    recipeObj['key'] = Number(key) //converting the string of the recipe key into a number
     foundRecipesArray.push(recipeObj)
   })
 
@@ -60,6 +68,15 @@ async function savingNewRecipe (newRecipeObj) {
   }
 }
 
+async function updatingRecipe (key, recipeToUpdate) {
+  try {
+    await AsyncStorage.setItem(key.toString(), JSON.stringify(recipeToUpdate))
+  } catch (error) {
+    console.trace(error)
+  }
+}
+
+//this function makes random numbers to use as a storage ID for each recipe
 function IDGenerator() {
 
   this.length = 8;
