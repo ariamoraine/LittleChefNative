@@ -36,7 +36,12 @@ async function getRecipes () {
   let foundRecipesArray = []
 
   foundRecipesObj.map(recipe => {
-    foundRecipesArray.push(JSON.parse(recipe[1]))
+    let [key, recipeObj] = recipe
+    recipeObj = JSON.parse(recipeObj) //this is a parsed version of the found recipe
+    key = Number(key) //converting the string of the recipe key into a number
+    recipeObj['key'] = key
+    console.log("THINGS", recipeObj)
+    foundRecipesArray.push(recipeObj)
   })
 
   try {
