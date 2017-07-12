@@ -98,8 +98,6 @@ export default class AddRecipe extends Component {
     };
 
     if (this.state.key) { //if the state has a key that means we are editing a old recipe
-      console.log('TESTING INSIDE IF OF SAVE DATA')
-      //here is where we would call update
       store.dispatch(updateRecipe(this.state.key, recipeObjToSave))
     } else {
       store.dispatch(saveNewRecipe(recipeObjToSave));
