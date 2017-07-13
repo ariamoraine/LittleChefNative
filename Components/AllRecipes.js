@@ -42,10 +42,10 @@ export default class AllRecipes extends Component {
           <Text />
           {
             //break this out into a recipe component
-            recipes.map((recipe, index) => {
+            recipes.map((recipe) => {
               const photoSource = recipe.photoUri ? {uri: recipe.photoUri} : defaultImage;
               return (
-                <View style={theme.cardStyle} key={index}>
+                <View style={theme.cardStyle} key={recipe.key}>
                 <TouchableOpacity onPress={() => navigate('SingleRecipe', {currentRecipe: recipe})}>
                     <Image source={photoSource} style={theme.cardImageStyle}/>
                     <Text style={theme.cardTitleStyle}>{recipe.title}</Text>
@@ -57,7 +57,7 @@ export default class AllRecipes extends Component {
         </ScrollView>
         <TouchableHighlight
           style={allRecipes.addRecipeButton}
-          onPress={() => navigate('AddOrEdit')}
+          onPress={() => navigate('AddOrEditChoice')}
         >
         <Text style={allRecipes.addRecipeText}>ADD / EDIT A RECIPE</Text>
         </TouchableHighlight>

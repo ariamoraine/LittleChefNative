@@ -120,7 +120,6 @@ export default class AddRecipe extends Component {
 
   render () {
     const { navigate } = this.props.navigation;
-    console.log("State", this.state)
     return (
       <View>
         <Text>Add a recipe here!</Text>

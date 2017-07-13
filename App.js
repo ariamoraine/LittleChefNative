@@ -3,8 +3,8 @@ import { StackNavigator } from 'react-navigation';
 
 import SingleRecipe from './Components/SingleRecipe';
 import AllRecipes from './Components/AllRecipes';
-import AddRecipe from './Components/AddRecipe';
-import AddOrEdit from './Components/AddOrEdit';
+import AddEditRecipe from './Components/AddEditRecipe';
+import AddOrEditChoice from './Components/AddOrEditChoice';
 import HomeScreen from './Components';
 
 const littleChefRouter = StackNavigator({
@@ -20,8 +20,8 @@ const littleChefRouter = StackNavigator({
       header: null
     }
   },
-  AddRecipe: {
-    screen: AddRecipe,
+  AddEditRecipe: {
+    screen: AddEditRecipe,
     navigationOptions: {
       header: null
     }
@@ -32,8 +32,8 @@ const littleChefRouter = StackNavigator({
       header: null
     }
   },
-  AddOrEdit: {
-    screen: AddOrEdit,
+  AddOrEditChoice: {
+    screen: AddOrEditChoice,
     navigationOptions: {
       header: null
     }

@@ -3,11 +3,15 @@ import {
   Text,
   View,
   Button,
-  Picker
+  Picker,
+  TouchableHighlight
 } from 'react-native';
+import { getTheme } from 'react-native-material-kit';
+import { allRecipes } from '../assets/styles/theme';
 import store from '../configureStore';
 
-export default class AddOrEdit extends Component {
+
+export default class AddOrEditChoice extends Component {
 
   constructor (props) {
     super(props);
@@ -28,19 +32,24 @@ export default class AddOrEdit extends Component {
   }
 
   render () {
-    console.log(this.state)
+    const theme = getTheme();
+    const { navigate } = this.props.navigation
     return (
       <View>
+        <TouchableHighlight onPress={() => navigate('AddRecipe')}>
+          <Text style={allRecipes.headerText }>ADD A RECIPE</Text>
+        </TouchableHighlight>
         <Button
-          onPress={() => this.props.navigation.navigate('AddRecipe')}
+          style={allRecipes.headerText}
+          onPress={() => navigate('AddRecipe')}
           title='Add a recipe'
         />
         <Picker
           selectedValue={this.state.currentRecipe}
           onValueChange={(item) => this.setState({currentRecipe: item})}
-        >
+          >
           {
-            this.state.allrecipes.map(recipe => <Picker.Item label={`${recipe.title}`} value={recipe} />)
+            this.state.allrecipes.map(recipe => <Picker.Item key={recipe.key} label={`${recipe.title}`} value={recipe} />)
           }
         </Picker>
         <Button
