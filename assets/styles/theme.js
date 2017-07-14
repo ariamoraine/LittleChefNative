@@ -59,3 +59,11 @@ export const allRecipes = {
     textAlign: 'center'
   }
 };
+
+export const addOrEditChoice = {
+  headerText: {
+    top: 10,
+    fontFamily: MAINFONT,
+    fontSize: 35
+  },
+}

@@ -7,7 +7,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import { getTheme } from 'react-native-material-kit';
-import { allRecipes } from '../assets/styles/theme';
+import { addOrEditChoice } from '../assets/styles/theme';
 import store from '../configureStore';
 
 
@@ -37,7 +37,7 @@ export default class AddOrEditChoice extends Component {
     return (
       <View>
         <TouchableHighlight onPress={() => navigate('AddRecipe')}>
-          <Text style={allRecipes.headerText }>ADD A RECIPE</Text>
+          <Text style={addOrEditChoice.headerText }>ADD A RECIPE</Text>
         </TouchableHighlight>
         <Button
           style={allRecipes.headerText}
