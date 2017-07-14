@@ -36,12 +36,13 @@ export default class AllRecipes extends Component {
     const theme = getTheme();
 
     return (
-      <View style={{flex: 1}}>
+      <View style={allRecipes.wrapper}>
+        {
+        recipes.length > 0 ? //checking if there are any saved recipes if true display them
         <ScrollView contentContainerStyle={allRecipes.main}>
           <Text style={allRecipes.headerText}>ALL RECIPES </Text>
           <Text />
           {
-            //break this out into a recipe component
             recipes.map((recipe) => {
               const photoSource = recipe.photoUri ? {uri: recipe.photoUri} : defaultImage;
               return (
@@ -55,6 +56,9 @@ export default class AllRecipes extends Component {
             })
           }
         </ScrollView>
+        : //else if there are no saved recipes show an error message to add some
+        <Text style={allRecipes.noRecipeText}>{`You dont have any recipes saved yet. \nAdd one with the button below`}</Text>
+          }
         <TouchableHighlight
           style={allRecipes.addRecipeButton}
           onPress={() => navigate('AddOrEditChoice')}

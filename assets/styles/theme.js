@@ -4,6 +4,7 @@ export const MAINFONT = 'JosefinSlab-SemiBoldItalic';
 export const SECONDFONT = 'JosefinSlab-Bold';
 export const TEXTHEADERSIZE = 45;
 export const PHOTOSIZE = Dimensions.get('window').width;
+export const ERRORCOLOR = '#f44b42';
 
 export const indexPage = {
   backgroundImage: {
@@ -33,6 +34,13 @@ export const indexPage = {
 }
 
 export const allRecipes = {
+  wrapper: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   main: {
     display: 'flex',
     flexDirection: 'column',
@@ -57,6 +65,12 @@ export const allRecipes = {
     fontFamily: MAINFONT,
     color: 'white',
     textAlign: 'center'
+  },
+  noRecipeText: {
+    fontFamily: MAINFONT,
+    color: ERRORCOLOR,
+    textAlign: 'center',
+    fontSize: 40
   }
 };
 
